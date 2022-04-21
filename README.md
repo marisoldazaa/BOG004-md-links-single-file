@@ -1,4 +1,4 @@
-# Markdown Links
+# Markdown Links Single File
 
 ## Índice
 
@@ -100,15 +100,6 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [Arrow Functions](https://curriculum.laboratoria.la/es/topics/javascript/03-functions/02-arrow)
   * [Funciones — bloques de código reutilizables - MDN](https://developer.mozilla.org/es/docs/Learn/JavaScript/Building_blocks/Functions)
 </p></details>
-
-- [ ] **Recursión o recursividad**
-
-  <details><summary>Links</summary><p>
-
-  * [Píldora recursión - YouTube Laboratoria Developers](https://www.youtube.com/watch?v=lPPgY3HLlhQ)
-  * [Recursión o Recursividad - Laboratoria Developers en Medium](https://medium.com/laboratoria-developers/recursi%C3%B3n-o-recursividad-ec8f1a359727)
-</p></details>
-
 - [ ] **Módulos de CommonJS**
 
   <details><summary>Links</summary><p>
@@ -302,9 +293,7 @@ siguiente interfaz:
 
 ##### Argumentos
 
-* `path`: Ruta **absoluta** o **relativa** al **archivo** o **directorio**.
-Si la ruta pasada es relativa, debe resolverse como relativa al directorio
-desde donde se invoca node - _current working directory_).
+* `path`: Ruta **absoluta** al **archivo**
 * `options`: Un objeto con **únicamente** la siguiente propiedad:
   - `validate`: Booleano que determina si se desea validar los links
     encontrados.
@@ -396,27 +385,6 @@ Vemos que el _output_ en este caso incluye la palabra `ok` o `fail` después de
 la URL, así como el status de la respuesta recibida a la petición HTTP a dicha
 URL.
 
-##### `--stats`
-
-Si pasamos la opción `--stats` el output (salida) será un texto con estadísticas
-básicas sobre los links.
-
-```sh
-$ md-links ./some/example.md --stats
-Total: 3
-Unique: 3
-```
-
-También podemos combinar `--stats` y `--validate` para obtener estadísticas que
-necesiten de los resultados de la validación.
-
-```sh
-$ md-links ./some/example.md --stats --validate
-Total: 3
-Unique: 3
-Broken: 1
-```
-
 ## 6. Entregables
 
 Módulo instalable via `npm install <github-user>/md-links`. Este módulo debe
@@ -504,7 +472,6 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 * [Publicar packpage](https://docs.npmjs.com/getting-started/publishing-npm-packages)
 * [Crear módulos en Node.js](https://docs.npmjs.com/getting-started/publishing-npm-packages)
 * [Leer un archivo](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback)
-* [Leer un directorio](https://nodejs.org/api/fs.html#fs_fs_readdir_path_options_callback)
 * [Path](https://nodejs.org/api/path.html)
 * [Linea de comando CLI](https://medium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e)
 
@@ -524,7 +491,6 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 
 * [ ] El módulo exporta una función con la interfaz (API) esperada.
 * [ ] Implementa soporte para archivo individual
-* [ ] Implementa soporte para directorios
 * [ ] Implementa `options.validate`
 
 ### CLI
@@ -532,7 +498,6 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 * [ ] Expone ejecutable `md-links` en el path (configurado en `package.json`)
 * [ ] Se ejecuta sin errores / output esperado
 * [ ] Implementa `--validate`
-* [ ] Implementa `--stats`
 
 ### Pruebas / tests
 
@@ -606,49 +571,6 @@ Recuerda, las extensiones son esas letras al final del
 nombre de un archivo, por ejemplo: .js, .txt, .doc, etc
 
 Aquí también podrá ser útil `FS`.
-
-### Obtén el contenido de un directorio
-
-Este proyecto consiste en buscar archivos, pero para eso,
-primero debes poder verlos.
-
-Intenta imprimir en consola la lista de archivos en una carpeta.
-
-La librería `FS` también te será útil aquí.
-
-Para simplificar la recursividad, te recomendamos usar __readdirSync__.
-
-### Une dos rutas
-
-Para poder acceder a carpetas y archivos será necesario que
-indiques en qué lugar de tu computadora se encuentran, a esto
-le llamamos **rutas**.
-
-Usa la librería nativa `path` para unir dos segmentos de ruta,
-por ejemplo, si queremos unir:
-
-1) /home/Laboratoria/
-2) ./test
-
-El resultado sería: /home/Laboratoria/test
-
-### Recursividad
-
-Este proyecto se ha de resolver de forma casi natural con
-**recursividad**.
-
-¿Por qué?.
-
-Porque no conocemos realmente cuántas carpetas y archivos
-tendremos que recorrer antes de terminar.
-
-Si recibes una ruta de carpeta, no sabrás de ante mano si
-dentro hay más carpetas o muchos archivos.
-
-Por ello, asegúrate bien de entender de qué trata la
-recursividad y ver algunos ejemplos.
-
-Entre los recursos de este proyecto hay un video que te ayudará.
 
 ### Crea una promesa
 
