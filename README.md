@@ -36,8 +36,7 @@ algunas estadísticas.
 
 ## 2. Resumen del proyecto
 
-En este proyecto crearás una herramienta de línea de comando (CLI) así como tu
-propia librería (o biblioteca - library) en JavaScript.
+En este proyecto crearás un script de JavaScript para ser ejecutado en la terminal o consola.
 
 En esta oportunidad nos alejamos un poco del navegador para construir un
 programa que se ejecute usando Node.js. Aprenderemos sobre procesos
@@ -49,11 +48,6 @@ construido con el [motor de JavaScript V8 de Chrome](https://developers.google.c
 Esto nos va a permitir ejecutar JavaScript en el entorno del sistema operativo,
 ya sea tu máquina o un servidor, lo cual nos abre las puertas para poder
 interactuar con el sistema en sí, archivos, redes, ...
-
-Diseñar tu propia librería es una experiencia fundamental para cualquier
-desarrollador porque te obliga a pensar en la interfaz (API) de tus
-_módulos_ y cómo será usado por otros developers. Debes tener especial
-consideración en peculiaridades del lenguaje, convenciones y buenas prácticas.
 
 ## 3. Objetivos de aprendizaje
 
@@ -100,6 +94,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [Arrow Functions](https://curriculum.laboratoria.la/es/topics/javascript/03-functions/02-arrow)
   * [Funciones — bloques de código reutilizables - MDN](https://developer.mozilla.org/es/docs/Learn/JavaScript/Building_blocks/Functions)
 </p></details>
+
 - [ ] **Módulos de CommonJS**
 
   <details><summary>Links</summary><p>
@@ -232,24 +227,14 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
 
 * Este proyecto se debe "resolver" de manera individual.
 
-* La **librería** y el **script ejecutable** (herramienta de línea de comando -
-  CLI) deben estar implementados en JavaScript para ser ejecutados con
+* El **script** deben estar implementados en JavaScript para ser ejecutados con
   Node.js. **Está permitido usar librerías externas**.
-
-* Tu módulo **debe ser instalable** via `npm install <github-user>/md-links`. Este
-  módulo debe incluir tanto un _ejecutable_ que podamos invocar en la línea de
-  comando como una interfaz que podamos importar con `require` para usarlo
-  programáticamente.
 
 * Los **tests unitarios** deben cubrir un mínimo del 70% de _statements_,
   _functions_, _lines_ y _branches_. Te recomendamos explorar [Jest](https://jestjs.io/)
   para tus pruebas unitarias.
 
 * Para este proyecto **no está permitido** utilizar `async/await`.
-
-* Para este proyecto es **opcional** el uso de ES Modules `(import/export)`, en el
-  caso optes utilizarlo deberás de crear un script de `build` en el `package.json`
-  que los transforme en `requires` y `module.exports` con ayuda de **babel**.
 
 ## 5. Criterios de aceptación mínimos del proyecto
 
@@ -270,6 +255,8 @@ considere necesarios.
   documentación del API y ejemplos. Todo lo relevante para que cualquier
   developer que quiera usar tu librería pueda hacerlo sin inconvenientes.
 * `index.js`: Desde este archivo debes exportar **una** función (`mdLinks`).
+* `cli.js`: Este archivo es el que se ejecuta desde consola y recibe los parámetros. 
+  Debe importar la función `mdLinks` y ejecutarla según los parámetros.
 * `package.json` con nombre, versión, descripción, autores, licencia,
   dependencias, scripts (pretest, test, ...), main, bin
 * `.editorconfig` con configuración para editores de texto. Este archivo no se
@@ -280,7 +267,7 @@ considere necesarios.
 * `.gitignore` para ignorar `node_modules` u otras carpetas que no deban
   incluirse en control de versiones (`git`).
 * `test/md-links.spec.js` debe contener los tests unitarios para la función
-  `mdLinks()`. Tu inplementación debe pasar estos tets.
+  `mdLinks()`. Tu inplementación debe pasar estos tests.
 
 ## Este proyecto consta de DOS partes
 
@@ -321,7 +308,7 @@ Con `validate:true` :
 #### Ejemplo (resultados como comentarios)
 
 ```js
-const mdLinks = require("md-links");
+const mdLinks = require("index.js");
 
 mdLinks("./some/example.md")
   .then(links => {
@@ -342,17 +329,17 @@ mdLinks("./some/dir")
   .catch(console.error);
 ```
 
-### 2) CLI (Command Line Interface - Interfaz de Línea de Comando)
+### 2) Script
 
-El ejecutable de nuestra aplicación debe poder ejecutarse de la siguiente
+El script debe poder ejecutarse de la siguiente
 manera a través de la **terminal**:
 
-`md-links <path-to-file> [options]`
+`node cli.js <path-to-file> [options]`
 
 Por ejemplo:
 
 ```sh
-$ md-links ./some/example.md
+$ node cli.js ./some/example.md
 ./some/example.md http://algo.com/2/3/ Link a algo
 ./some/example.md https://otra-cosa.net/algun-doc.html algún doc
 ./some/example.md http://google.com/ Google
@@ -375,7 +362,7 @@ URL que responde ok, entonces consideraremos el link como ok.
 Por ejemplo:
 
 ```sh
-$ md-links ./some/example.md --validate
+$ node cli.js ./some/example.md --validate
 ./some/example.md http://algo.com/2/3/ ok 200 Link a algo
 ./some/example.md https://otra-cosa.net/algun-doc.html fail 404 algún doc
 ./some/example.md http://google.com/ ok 301 Google
@@ -385,43 +372,9 @@ Vemos que el _output_ en este caso incluye la palabra `ok` o `fail` después de
 la URL, así como el status de la respuesta recibida a la petición HTTP a dicha
 URL.
 
-## 6. Entregables
-
-Módulo instalable via `npm install <github-user>/md-links`. Este módulo debe
-incluir tanto **un ejecutable** como **una interfaz** que podamos importar con `require`
-para usarlo programáticamente.
-
-## 7. Hacker edition
-
-Las secciones llamadas _Hacker Edition_ son **opcionales**. Si **terminaste**
-con todo lo anterior y te queda tiempo, intenta completarlas. Así podrás
-profundizar y/o ejercitar más sobre los objetivos de aprendizaje del proyecto.
-
-* Puedes agregar la propiedad `line` a cada objeto `link` indicando en qué línea
-  del archivo se encontró el link.
-* Puedes agregar más estadísticas.
-* Integración continua con Travis o Circle CI.
-
-***
-
 ## 8. Pistas, tips y lecturas complementarias
 
 ### FAQs
-
-#### ¿Cómo hago para que mi módulo sea _instalable_ desde GitHub?
-
-Para que el módulo sea instalable desde GitHub solo tiene que:
-
-* Estar en un repo público de GitHub
-* Contener un `package.json` válido
-
-Con el comando `npm install githubname/reponame` podemos instalar directamente
-desde GitHub. Ver [docs oficiales de `npm install` acá](https://docs.npmjs.com/cli/install).
-
-Por ejemplo, el [`course-parser`](https://github.com/Laboratoria/course-parser)
-que usamos para la currícula no está publicado en el registro público de NPM,
-así que lo instalamos directamente desde GitHub con el comando `npm install
-Laboratoria/course-parser`.
 
 ### Sugerencias de implementación
 
@@ -473,7 +426,6 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 * [Crear módulos en Node.js](https://docs.npmjs.com/getting-started/publishing-npm-packages)
 * [Leer un archivo](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback)
 * [Path](https://nodejs.org/api/path.html)
-* [Linea de comando CLI](https://medium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e)
 
 ## 9. Checklist
 
@@ -495,7 +447,6 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 
 ### CLI
 
-* [ ] Expone ejecutable `md-links` en el path (configurado en `package.json`)
 * [ ] Se ejecuta sin errores / output esperado
 * [ ] Implementa `--validate`
 
